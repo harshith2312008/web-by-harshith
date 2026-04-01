@@ -20,6 +20,7 @@
     serverTimestamp 
   } from 'firebase/firestore';
   import { sendPasswordResetEmail } from 'firebase/auth';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
   import './app.css';
 
   let user = $state(null);
@@ -86,7 +87,7 @@
     
     if (user) {
       // Setup Socket.io
-      socket = io('http://localhost:3000');
+      socket = io(API_URL);
       socket.on('connect', () => {
         socket.emit('register', user.uid);
       });
@@ -157,7 +158,7 @@
     isSendingCode = true;
     
     try {
-      const response = await fetch('http://localhost:3000/api/send-verification-code', {
+      const response = await fetch(`${API_URL}/api/send-verification-code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: emailInput.trim() })
@@ -197,7 +198,7 @@
         }
         
         try {
-          const verifyRes = await fetch('http://localhost:3000/api/verify-code', {
+          const verifyRes = await fetch(`${API_URL}/api/verify-code`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: emailInput.trim(), code: verificationCodeInput })
@@ -225,7 +226,7 @@
 
         try {
           // Verify code and reset password via server API
-          const response = await fetch('http://localhost:3000/api/reset-password', {
+          const response = await fetch(`${API_URL}/api/reset-password`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -297,7 +298,7 @@
           return;
         }
         try {
-          const verifyRes = await fetch('http://localhost:3000/api/verify-code', {
+          const verifyRes = await fetch(`${API_URL}/api/verify-code`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: emailInput.trim(), code: verificationCodeInput })

@@ -64,7 +64,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'noreply.servicebrahvex@gmail.com',
-    pass: 'aqurunqpnbxtjttd' // Provided: aqur unqp nbxt jttd
+    pass: process.env.EMAIL_PASS || 'aqurunqpnbxtjttd' 
   }
 });
 

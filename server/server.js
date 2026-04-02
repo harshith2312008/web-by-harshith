@@ -48,6 +48,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Server is LIVE! 🚀');
+});
+
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {

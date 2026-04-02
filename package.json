@@ -1,16 +1,14 @@
 {
-  "name": "chat-app-monorepo",
+  "name": "chat-app",
   "private": true,
   "workspaces": [
-    "client",
+    "frontend",
     "server"
   ],
   "scripts": {
-    "install:all": "npm install && npm install --workspace=client && npm install --workspace=server",
-    "client:dev": "npm run dev --workspace=client",
-    "server:dev": "npm run dev --workspace=server",
-    "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\"",
-    "build:client": "npm run build --workspace=client"
+    "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run dev --workspace=server\"",
+    "build:frontend": "npm run build --workspace=frontend",
+    "start:server": "npm run start --workspace=server"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
